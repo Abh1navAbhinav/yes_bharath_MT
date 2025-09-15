@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:yes_bharath_mt/models/product_model.dart';
 import 'package:yes_bharath_mt/providers/product_provider.dart';
 import 'package:yes_bharath_mt/screens/product_detail_screen.dart';
+import 'package:yes_bharath_mt/utils/mock_data.dart';
 
 void main() {
   testWidgets('Product detail screen shows product data', (
@@ -14,18 +15,14 @@ void main() {
       id: '1',
       brand: 'Test Brand',
       name: 'Test Shirt',
-      imageUrl: 'https://example.com/test.jpg',
+      imageUrl: tempImageUrl,
       price: 1000,
       oldPrice: 1200,
       discount: 20,
       description: 'A test shirt description',
       availableSizes: ['S', 'M'],
       colors: ['Red'],
-      images: [
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWKrfFmnkIGfRit7ILUJ5SPaYKDSLWATSx2YD3WFJuEPLYFQKFE668cSwy-3CHAIwjpmM&usqp=CAU',
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWKrfFmnkIGfRit7ILUJ5SPaYKDSLWATSx2YD3WFJuEPLYFQKFE668cSwy-3CHAIwjpmM&usqp=CAU',
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWKrfFmnkIGfRit7ILUJ5SPaYKDSLWATSx2YD3WFJuEPLYFQKFE668cSwy-3CHAIwjpmM&usqp=CAU',
-      ],
+      images: [tempImageUrl, tempImageUrl, tempImageUrl],
     );
 
     await tester.pumpWidget(

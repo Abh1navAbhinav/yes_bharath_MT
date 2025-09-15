@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'E-Commerce Demo',
+      title: 'Yes bharath MT',
       theme: ThemeData(primarySwatch: Colors.blue),
       home: const ProductListScreen(),
     );

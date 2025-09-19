@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yes_bharath_mt/providers/product_provider.dart';
+import 'package:yes_bharath_mt/widgets/size_selector.dart';
 
 class ProductVariantSelector extends ConsumerWidget {
   final String title;
   final String subtitle;
   final List<VariantOption> options;
   final bool isColorBox; // if true → show color boxes instead of images
+  final ProductType productType;
 
   const ProductVariantSelector({
     super.key,
     required this.title,
     required this.subtitle,
     required this.options,
+    this.productType = ProductType.cloth,
     this.isColorBox = false,
   });
 
@@ -49,16 +52,21 @@ class ProductVariantSelector extends ConsumerWidget {
             ),
             Text(
               subtitle,
-              style: const TextStyle(fontSize: 12, color: Colors.black54),
+              style: const TextStyle(
+                fontSize: 12,
+                color: Colors.black54,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ],
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 16),
 
         // Options (images or color boxes)
         SizedBox(
-          height: 60,
+          height: isColorBox ? 30 : 64,
           child: ListView.separated(
+            shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             itemCount: options.length,
             separatorBuilder: (_, __) => const SizedBox(width: 10),
@@ -70,8 +78,8 @@ class ProductVariantSelector extends ConsumerWidget {
                 onTap: () =>
                     ref.read(selectedVariantProvider.notifier).state = index,
                 child: Container(
-                  width: 50,
-                  height: 50,
+                  width: isColorBox ? 30 : 62,
+                  height: isColorBox ? 30 : 64,
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: isSelected ? Colors.red : Colors.grey.shade300,
@@ -81,7 +89,7 @@ class ProductVariantSelector extends ConsumerWidget {
                     image: !isColorBox && option.imageUrl != null
                         ? DecorationImage(
                             image: NetworkImage(option.imageUrl!),
-                            fit: BoxFit.cover,
+                            fit: BoxFit.fill,
                           )
                         : null,
                     color: isColorBox ? option.color : null,
@@ -91,6 +99,10 @@ class ProductVariantSelector extends ConsumerWidget {
             },
           ),
         ),
+        SizedBox(height: 16),
+
+        // Size section
+        SizeSelectorWidget(productType: productType),
       ],
     );
   }

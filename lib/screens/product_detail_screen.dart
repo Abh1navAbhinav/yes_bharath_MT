@@ -6,7 +6,6 @@ import 'package:yes_bharath_mt/widgets/badge_icon.dart';
 import 'package:yes_bharath_mt/widgets/button_widget.dart';
 import 'package:yes_bharath_mt/widgets/product_card.dart';
 import 'package:yes_bharath_mt/widgets/product_variation_selector.dart';
-import 'package:yes_bharath_mt/widgets/size_selector.dart';
 
 import '../providers/product_provider.dart';
 
@@ -29,7 +28,9 @@ class ProductDetailScreen extends ConsumerWidget {
     }
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         actions: [
           BadgeIcon(icon: Icons.notifications_none, count: 2, onTap: () {}),
           BadgeIcon(icon: Icons.favorite_border, count: 0, onTap: () {}),
@@ -44,8 +45,9 @@ class ProductDetailScreen extends ConsumerWidget {
             // Product image carousel
             CarouselSlider(
               options: CarouselOptions(
-                height: 300,
+                height: 313,
                 enlargeCenterPage: true,
+                viewportFraction: 0.8,
                 autoPlay: true,
                 autoPlayAnimationDuration: const Duration(milliseconds: 500),
                 onPageChanged: (index, _) {
@@ -53,27 +55,24 @@ class ProductDetailScreen extends ConsumerWidget {
                 },
               ),
               items: product.images.map((item) {
-                return ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Image.network(
-                    item,
-                    height: 250,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
+                return Image.network(
+                  item,
+                  height: 250,
+                  width: double.infinity,
+                  fit: BoxFit.fill,
                 );
               }).toList(),
             ),
 
-            const SizedBox(height: 10),
+            const SizedBox(height: 8),
 
             // Carousel indicator dots
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: product.images.asMap().entries.map((entry) {
                 return Container(
-                  width: 8,
-                  height: 8,
+                  width: 6,
+                  height: 6,
                   margin: const EdgeInsets.symmetric(horizontal: 4),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
@@ -87,10 +86,17 @@ class ProductDetailScreen extends ConsumerWidget {
 
             const SizedBox(height: 12),
 
+            // Product brand
+            Text(
+              product.brand,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+            ),
+
+            const SizedBox(height: 4),
             // Product name
             Text(
               product.name,
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
             ),
 
             const SizedBox(height: 8),
@@ -122,7 +128,7 @@ class ProductDetailScreen extends ConsumerWidget {
               ],
             ),
 
-            const SizedBox(height: 16),
+            const SizedBox(height: 44),
 
             //
             ProductVariantSelector(
@@ -132,13 +138,14 @@ class ProductDetailScreen extends ConsumerWidget {
                 VariantOption.image(tempImageUrl),
                 VariantOption.image(tempImageUrl),
                 VariantOption.image(tempImageUrl),
+                VariantOption.image(tempImageUrl),
+                VariantOption.image(tempImageUrl),
+                VariantOption.image(tempImageUrl),
               ],
             ),
 
-            const SizedBox(height: 16),
-
             //
-            ProductVariantSelector(
+            /*   ProductVariantSelector(
               title: "Black",
               subtitle: "Only 5 Left",
               options: [
@@ -163,26 +170,7 @@ class ProductDetailScreen extends ConsumerWidget {
               ],
             ),
 
-            const SizedBox(height: 16),
-
-            // Size section
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text(
-                  'Size',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text('Size Chart', style: TextStyle(color: Colors.grey)),
-              ],
-            ),
-            const SizedBox(height: 16),
-            SizeSelectorWidget(productType: ProductType.cloth),
-            SizeSelectorWidget(productType: ProductType.fabric),
-
+            const SizedBox(height: 16), */
             const SizedBox(height: 16),
 
             // Features section
@@ -221,6 +209,8 @@ class ProductDetailScreen extends ConsumerWidget {
                 ),
               ],
             ),
+
+            SizedBox(height: 16),
 
             SizedBox(
               height: 280,

@@ -15,6 +15,8 @@ void main() {
       id: '1',
       brand: 'Test Brand',
       name: 'Test Shirt',
+      isTrending: false,
+      isFavourite: false,
       imageUrl: tempImageUrl,
       price: 1000,
       oldPrice: 1200,

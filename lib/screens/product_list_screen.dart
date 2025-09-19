@@ -6,7 +6,7 @@ import 'product_detail_screen.dart';
 
 /// Displays a list of products in a grid format with a search bar on top.
 ///
-/// Uses Riverpod to fetch the product list from [productListProvider].  
+/// Uses Riverpod to fetch the product list from [productListProvider].
 /// On tapping a product, navigates to [ProductDetailScreen] while updating
 /// the [selectedProductProvider].
 class ProductListScreen extends ConsumerWidget {
@@ -17,6 +17,7 @@ class ProductListScreen extends ConsumerWidget {
     final products = ref.watch(productListProvider);
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -26,13 +27,22 @@ class ProductListScreen extends ConsumerWidget {
               child: TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   hintText: "Men's Shirt",
-                  prefixIcon: const Icon(Icons.arrow_back_rounded,
-                      color: Colors.grey),
-                  suffixIcon:
-                      const Icon(Icons.cancel_outlined, color: Colors.grey),
+                  prefixIcon: const Icon(
+                    Icons.arrow_back_rounded,
+                    color: Colors.grey,
+                  ),
+                  suffixIcon: const Icon(
+                    Icons.cancel_outlined,
+                    color: Colors.grey,
+                  ),
                 ),
               ),
             ),
@@ -45,9 +55,9 @@ class ProductListScreen extends ConsumerWidget {
               itemCount: products.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 0.85,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
+                childAspectRatio: 0.9,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
               ),
               itemBuilder: (context, index) {
                 final product = products[index];
@@ -95,19 +105,13 @@ class _BottomNavItem extends StatelessWidget {
   final IconData icon;
   final String label;
 
-  const _BottomNavItem({
-    required this.icon,
-    required this.label,
-  });
+  const _BottomNavItem({required this.icon, required this.label});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(icon),
-        Text(label),
-      ],
+      children: [Icon(icon), Text(label)],
     );
   }
 }
